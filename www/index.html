@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR and QA App</title>
+    <link rel="stylesheet" href="style.css"></link>
+    <script src="./scripts/tesseract.worker.min.js"></script>
+    <script src="./scripts/tesseract.min.js"></script>
+    <script src="./scripts/tensorflow.min.js"></script>
+    <script src="./scripts/qna.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>OCR and QA App</h1>
+        <div id="file-upload">
+            <input type="file" id="fileInput" accept="image/*" multiple>
+            <button id="uploadBtn">Upload and Process</button>
+        </div>
+        <div id="textOutput"></div>
+        <div id="qaSection" style="display: none;">
+            <input type="text" id="questionInput" placeholder="Ask a question about the text">
+            <button id="askBtn">Ask</button>
+            <div id="answerOutput"></div>
+        </div>
+    </div>
+    <script src="./scripts/main.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then((reg) => console.log('Service worker registered.', reg))
+                    .catch((err) => console.log('Service worker registration failed:', err));
+            });
+        }
+    </script>
+</body>
+</html>
